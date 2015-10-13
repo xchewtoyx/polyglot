@@ -1,12 +1,12 @@
 class Decoder(object):
     def __init__(self):
-        self.types = {
+        self.readers = {
             'i': self.read_int,
             'd': self.read_dict,
             'l': self.read_list,
         }
         for digit in range(10):
-            self.types[str(digit)] = self.read_str
+            self.readers[str(digit)] = self.read_str
 
     def decode(self, data):
         length, value = self.read_token(data)
@@ -49,4 +49,4 @@ class Decoder(object):
 
     def read_token(self, data):
         marker = data[0]
-        return self.types[marker](data)
+        return self.readers[marker](data)
